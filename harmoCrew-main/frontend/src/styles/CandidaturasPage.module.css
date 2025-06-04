@@ -1,0 +1,117 @@
+.container {
+    max-width: 800px;
+    margin: auto;
+    padding: 1rem;
+    color: var(--text-light);
+    background-color: var(--primary);
+    border-radius: 8px;
+  }
+  
+  .card {
+    border: 1px solid var(--primary);
+    padding: 1rem;
+    margin-bottom: 0.8rem;
+    border-radius: 8px;
+    background-color: var(--primary-dark);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    cursor: pointer;
+  }
+  
+ .card:hover {
+  background-color: var(--accent-color); /* Fundo de destaque no hover */
+  color: var(--text-white);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+}
+  
+ .aprovadosContainer {
+  background-color: var(--accent-green);
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  position: relative;
+}
+  
+.aprovadosContainer::before {
+    content: '✅'; /* Ícone de check */
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    font-size: 1.5rem;
+}
+
+.aprovadosContainer h4 {
+    margin-left: 2.5rem;
+    margin-top: 0;
+    color: var(--text-white);
+}
+.aprovadosContainer ul {
+    list-style: none;
+    padding-left: 0;
+}
+.aprovadosContainer li {
+    padding: 0.3rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+.aprovadosContainer li:last-child {
+    border-bottom: none;
+}
+
+  .modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+  
+  .modalContent {
+    background: var(--primary-dark);
+    padding: 1.5rem;
+    border-radius: 10px;
+    max-width: 450px;
+    width: 90%;
+    color: var(--text-white);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+  
+  .buttons {
+    margin-top: 1rem;
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+  }
+  
+  .acceptButton {
+    background-color: var(--accent-green);
+    color: var(--text-white);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .acceptButton:hover {
+    background-color: #16a34a;
+  }
+  
+  .rejectButton {
+    background-color: var(--error);
+    color: var(--text-white);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .rejectButton:hover {
+    background-color: #b91c1c;
+  }
+  

@@ -1,0 +1,109 @@
+.container {
+  display: flex;
+  padding: 2rem;
+  gap: 2rem;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  min-height: 100vh;
+}
+
+.profileSidebar {
+  width: 300px;
+  text-align: center;
+  background-color: var(--card-color);
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+}
+
+.userPhoto {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin: 0 auto 1rem;
+  object-fit: cover;
+  border: 3px solid var(--accent-purple);
+}
+
+.followButton {
+  margin-top: 0.5rem;
+  background-color: var(--accent-color);
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.followButton:hover {
+  background-color: #4b4a48;
+}
+
+.description {
+  margin-top: 1rem;
+  color: var(--muted-text);
+}
+
+.profileContent {
+  flex: 1;
+  background-color: var(--card-color);
+  border-radius: 10px;
+  padding: 1rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+}
+
+.tabs {
+  display: flex;
+  border-bottom: 2px solid #333;
+  margin-bottom: 1rem;
+}
+
+.tabs button {
+  padding: 0.8rem 2rem;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-weight: bold;
+  color: var(--text-color);
+  position: relative;
+  transition: color 0.3s;
+  margin-right: 1rem;
+}
+
+.tabs button:hover {
+  background-color: rgba(96, 165, 250, 0.1)
+}
+
+.activeTab {
+  background-color: var(--primary-dark); 
+  border-bottom: 3px solid var(--accent-blue); 
+  color: var(--accent-blue);
+}
+
+
+.projects,
+.friends {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.projectCard, .friendCard {
+  background-color: var(--primary-dark);
+  border: 1px solid var(--primary);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+
+.friendCard img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.projectCard:hover, .friendCard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+}

@@ -77,7 +77,6 @@ const CandidaturasPage = () => {
           setAprovados((prev) => {
             const postId = selectedCandidatura.post_id;
             const novosAprovados = prev[postId] ? [...prev[postId]] : [];
-            // Evita duplicar
             if (
               !novosAprovados.find(
                 (c) => c.candidatura_id === selectedCandidatura.candidatura_id
@@ -146,24 +145,23 @@ const CandidaturasPage = () => {
           ))}
 
           <h3>Candidatos Aprovados</h3>
-{Object.entries(aprovados).length === 0 ? (
-  <p>Nenhum candidato aprovado ainda.</p>
-) : (
-  Object.entries(aprovados).map(([postId, aprovadosDoPost]) => (
-    <div key={postId} className={styles.aprovadosContainer}>
-      <h4>Projeto: {aprovadosDoPost[0]?.texto_post || `ID ${postId}`}</h4>
-      <ul>
-        {aprovadosDoPost.map((ap) => (
-          <li key={ap.candidatura_id}>
-            {ap.nome_candidato} ({ap.email_candidato}) — Candidatura aceita em{" "}
-            {new Date(ap.data_candidatura).toLocaleString()}
-          </li>
-        ))}
-      </ul>
-    </div>
-  ))
-)}
-
+          {Object.entries(aprovados).length === 0 ? (
+            <p>Nenhum candidato aprovado ainda.</p>
+          ) : (
+            Object.entries(aprovados).map(([postId, aprovadosDoPost]) => (
+              <div key={postId} className={styles.aprovadosContainer}>
+                <h4>Projeto: {aprovadosDoPost[0]?.texto_post || `ID ${postId}`}</h4>
+                <ul>
+                  {aprovadosDoPost.map((ap) => (
+                    <li key={ap.candidatura_id}>
+                      {ap.nome_candidato} ({ap.email_candidato}) — Candidatura aceita em{" "}
+                      {new Date(ap.data_candidatura).toLocaleString()}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))
+          )}
 
           {modalOpen && selectedCandidatura && (
             <div className={styles.modalOverlay} onClick={fecharModal}>

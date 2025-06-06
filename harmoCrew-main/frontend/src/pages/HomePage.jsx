@@ -7,10 +7,9 @@ const HomePage = () => {
   const { token, user, logout } = useAuth();
   const [posts, setPosts] = useState([]);
   
-  // Estados para o novo post
-  const [newPostTitle, setNewPostTitle] = useState(""); // NOVO ESTADO: Título
-  const [newPostText, setNewPostText] = useState("");   // Descrição (já existia)
-  const [newPostAudioUrl, setNewPostAudioUrl] = useState(""); // NOVO ESTADO: URL do Áudio
+  const [newPostTitle, setNewPostTitle] = useState(""); 
+  const [newPostText, setNewPostText] = useState("");   
+  const [newPostAudioUrl, setNewPostAudioUrl] = useState(""); 
 
   const [loading, setLoading] = useState(false); 
   const [loadingCreate, setLoadingCreate] = useState(false); 
@@ -106,7 +105,7 @@ const HomePage = () => {
 
   const handleCreatePost = async (e) => {
     e.preventDefault();
-    if (!newPostTitle.trim()) { // Título agora é obrigatório
+    if (!newPostTitle.trim()) { 
       alert("O título do projeto é obrigatório!");
       return;
     }
@@ -119,7 +118,7 @@ const HomePage = () => {
       const postData = {
         titulo: newPostTitle,
         texto: newPostText,
-        audio_url: newPostAudioUrl.trim() || null, // Envia null se vazio
+        audio_url: newPostAudioUrl.trim() || null, 
       };
 
       const res = await fetch("http://localhost:5000/posts", {
@@ -133,13 +132,13 @@ const HomePage = () => {
       const data = await res.json();
       if (res.ok) {
         const newPost = {
-            ...data.post, // O backend já deve retornar o post completo
+            ...data.post, 
             nome: user.nome, 
             profile_pic_url: user.profile_pic_url || `https://i.pravatar.cc/50?u=${user.id}`,
             user_id: user.id 
         };
         setPosts([newPost, ...posts]);
-        setNewPostTitle(""); // Limpa os campos do formulário
+        setNewPostTitle(""); 
         setNewPostText("");
         setNewPostAudioUrl("");
         setShowNewPostModal(false);
@@ -154,7 +153,6 @@ const HomePage = () => {
   };
 
   const handleCandidatar = async (postId) => {
-    // ... (função handleCandidatar existente) ...
     if (!token) {
       alert("Você precisa estar logado para se candidatar.");
       navigate('/login');
@@ -174,9 +172,7 @@ const HomePage = () => {
 
   return (
     <div className={styles.wrapper}>
-      {/* Sidebar Esquerda (Busca e Você Segue) */}
       <aside className={styles.sidebarLeft}>
-        {/* ... (código da sidebarLeft existente) ... */}
         <h3 className={styles.sidebarTitle}>Pesquisar</h3>
         <input
           className={styles.search}
@@ -238,7 +234,6 @@ const HomePage = () => {
         )}
       </aside>
 
-      {/* Feed Central */}
       <main className={styles.feed}>
         {loading && posts.length === 0 && <p>Carregando posts...</p>}
         {!loading && posts.length === 0 && <p>Nenhum post disponível no momento.</p>}
@@ -259,13 +254,11 @@ const HomePage = () => {
               </Link>
             </div>
 
-            {/* NOVO: Título do Post */}
             {post.titulo && <h4 className={styles.postTitle}>{post.titulo}</h4>}
             
             <div className={styles.postContentMain}>
               <p className={styles.postDescription}>{post.texto}</p>
               
-              {/* NOVO: Player de Áudio se URL existir */}
               {post.audio_url && (
                 <div className={styles.audioPlayerContainer}>
                   <audio controls src={post.audio_url} className={styles.audioPlayer}>
@@ -274,8 +267,7 @@ const HomePage = () => {
                 </div>
               )}
 
-              {/* O footer antigo com play/progress bar foi removido para dar lugar ao <audio controls> */}
-              <div className={styles.postFooterSimple}> {/* Renomeado para evitar conflito */}
+              <div className={styles.postFooterSimple}>
                 <small className={styles.postDate}>
                   {new Date(post.created_at || post.data).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' })}
                 </small>
@@ -296,21 +288,20 @@ const HomePage = () => {
         ))}
       </main>
 
-      {/* Modal de Criar Novo Projeto (Anunciar) */}
       {showNewPostModal && (
         <div className={styles.overlay} onClick={() => setShowNewPostModal(false)}>
-          <div className={styles.modalAnunciar} onClick={(e) => e.stopPropagation()}> {/* Nova classe para estilização específica */}
+          <div className={styles.modalAnunciar} onClick={(e) => e.stopPropagation()}>
             <h3>Novo Projeto Musical</h3>
             <form onSubmit={handleCreatePost} className={styles.anunciarForm}>
               <div className={styles.formGroup}>
-                <label htmlFor="postTitulo">Título do Projeto</label>
+                <label htmlFor="postTitulo">Título</label>
                 <input
                   type="text"
                   id="postTitulo"
                   placeholder="Ex: Faixa de Lo-fi para estudos"
                   value={newPostTitle}
                   onChange={(e) => setNewPostTitle(e.target.value)}
-                  className={styles.inputField}
+                  className={styles.inputFieldAnunciar}
                 />
               </div>
               <div className={styles.formGroup}>
@@ -321,28 +312,21 @@ const HomePage = () => {
                   value={newPostText}
                   onChange={(e) => setNewPostText(e.target.value)}
                   rows={5}
-                  className={styles.textareaField}
+                  className={styles.textareaFieldAnunciar}
                 />
               </div>
               <div className={styles.formGroup}>
-                <label htmlFor="postAudioUrl">Adicione sua faixa de áudio (URL)</label>
+                <label htmlFor="postAudioUrl" className={styles.audioUrlLabel}>
+                  ADICIONE SUA FAIXA DE ÁUDIO <span className={styles.plusIcon}></span>
+                </label>
                 <input
-                  type="text" // MUDADO para text para URL. Para upload real, seria type="file"
+                  type="text" 
                   id="postAudioUrl"
                   placeholder="https://... (link direto para o arquivo de áudio)"
                   value={newPostAudioUrl}
                   onChange={(e) => setNewPostAudioUrl(e.target.value)}
-                  className={styles.inputField}
+                  className={styles.inputFieldAnunciar}
                 />
-                {/* Para upload de arquivo real (mais complexo, para o futuro):
-                <input 
-                  type="file" 
-                  id="postAudioFile" 
-                  accept="audio/*" 
-                  className={styles.inputFile} 
-                  // onChange={handleFileChange} 
-                /> 
-                */}
               </div>
               <div className={styles.modalActionsAnunciar}>
                 <button
@@ -357,7 +341,7 @@ const HomePage = () => {
                   className={`${styles.buttonAnunciar} ${styles.publishButtonAnunciar}`}
                   disabled={loadingCreate}
                 >
-                  {loadingCreate ? "Postando..." : "Postar Projeto"}
+                  {loadingCreate ? "Postando..." : "Postar"}
                 </button>
               </div>
             </form>

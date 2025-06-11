@@ -1,0 +1,180 @@
+.pageWrapper {
+  display: flex;
+  padding: 3rem 4rem;
+  gap: 4rem;
+  min-height: calc(100vh - 60px - 6rem); 
+  color: var(--text-light);
+}
+
+.leftColumn {
+  flex: 0 0 280px; 
+}
+
+.pageTitle {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--text-white);
+  position: sticky; 
+  top: 100px; 
+}
+
+.rightColumn {
+  flex: 1;
+  max-width: 700px; 
+}
+
+.loading, .noCandidaturas {
+  text-align: center;
+  font-size: 1.1rem;
+  color: var(--text-light-secondary);
+  padding: 2rem;
+}
+
+.projetoContainer {
+  margin-bottom: 2rem;
+}
+
+.projetoHeader {
+  padding-bottom: 0.75rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--accent-color-dark);
+  margin-bottom: 1.5rem;
+}
+
+
+.projetoHeader h3 {
+  margin: 0;
+  font-size: 1.4rem; 
+  color: var(--accent-pink); 
+  font-weight: 600; 
+  transition: color 0.3s ease;
+}
+
+.projetoHeader:hover h3 {
+  color: var(--highlight); 
+}
+
+
+.toggleIcon {
+  color: var(--accent-purple);
+  font-size: 1rem;
+  transition: transform 0.2s;
+}
+
+.projetoHeader:hover .toggleIcon {
+  transform: scale(1.2);
+}
+
+.candidatosList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-left: 1rem;
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.candidatoCard {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.8rem 1rem;
+  background-color: var(--primary);
+  border-radius: 8px;
+  border: 1px solid var(--accent-color-dark);
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.candidatoCard.aceito {
+  background-color: rgba(34, 197, 94, 0.1);
+  border-color: var(--accent-green);
+}
+
+.candidatoCard.rejeitado {
+  background-color: rgba(239, 68, 68, 0.1);
+  border-color: var(--error);
+  opacity: 0.7;
+}
+
+.candidatoAvatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.candidatoInfo {
+  flex-grow: 1;
+}
+
+.candidatoNome {
+  display: block;
+  font-weight: 500;
+  color: var(--text-white);
+}
+
+.candidatoPortfolio {
+  font-size: 0.85rem;
+  color: var(--accent-blue);
+  text-decoration: none;
+}
+
+.candidatoPortfolio:hover {
+  text-decoration: underline;
+}
+
+.actions {
+  display: flex;
+  gap: 0.8rem;
+}
+
+.actionButton {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  font-weight: bold;
+  line-height: 1;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  transition: transform 0.2s, color 0.2s;
+}
+
+.accept {
+  color: var(--accent-green);
+}
+.accept:hover {
+  transform: scale(1.2);
+}
+
+.reject {
+  color: var(--error);
+}
+.reject:hover {
+  transform: scale(1.2);
+}
+
+.confirmButton {
+  align-self: flex-start;
+  margin-top: 1rem;
+  padding: 0.6rem 1.2rem;
+  background-color: var(--accent-purple);
+  color: var(--text-white);
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.confirmButton:hover {
+  background-color: var(--highlight);
+  transform: translateY(-2px);
+}
